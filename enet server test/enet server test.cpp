@@ -1733,6 +1733,11 @@ void SendPacketRaw(int a1, void *packetData, size_t packetDataSize, void *a4, EN
 				name = ((PlayerInfo*)(currentPeer->data))->displayName;
 
 		}
+					for (char c : message)
+				if (c < 0x18)
+				{
+					return;
+				}
 		GamePacket p = packetEnd(appendString(appendString(createPacket(), "OnConsoleMessage"), "`o<`w" + name + "`o> " + message));
 		GamePacket p2 = packetEnd(appendIntx(appendString(appendIntx(appendString(createPacket(), "OnTalkBubble"), netID), message), 0));
 		for (currentPeer = server->peers;
